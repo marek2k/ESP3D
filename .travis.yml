@@ -1,7 +1,8 @@
  language: python
  python:
      - "2.7"
-
+ os:
+  - linux
  sudo: false
  cache:
      directories:
@@ -13,3 +14,11 @@
 
  script:
      - platformio run
+     - sed -i "s/\/\/#define AUTHENTICATION_FEATURE /#define AUTHENTICATION_FEATURE/g" $TRAVIS_BUILD_DIR/esp3d/config.h
+     - platformio run
+
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
