@@ -13,9 +13,8 @@
      - platformio update
 
  script:
-     - platformio run
+     - platformio run --clean
      - sed -i "s/\/\/#define AUTHENTICATION_FEATURE /#define AUTHENTICATION_FEATURE/g" $TRAVIS_BUILD_DIR/esp3d/config.h
-     - platformio run
 
 
 notifications:
