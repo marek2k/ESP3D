@@ -14,8 +14,10 @@
 
  script:
      - platformio run --target clean
+     - platformio run
      - sed -i "s/\/\/#define AUTHENTICATION_FEATURE /#define AUTHENTICATION_FEATURE/g" $TRAVIS_BUILD_DIR/esp3d/config.h
-
+     - platformio run --target clean
+     - platformio run
 
 notifications:
   email:
