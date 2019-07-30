@@ -1,169 +1,170 @@
-* Change STA SSID 
-[ESP100]<SSID>
-if authentication is on, need admin password
+Note:
+1 - add space to separate parameters
+2 -  if parameter has space add \ in front of space to not be seen as separator
+
+* Set/Get STA SSID 
 [ESP100]<SSID>pwd=<admin password>
 
-* Change STA Password 
-[ESP101]<Password>
-if authentication is on, need admin password
+* Set STA Password 
 [ESP101]<Password>pwd=<admin password>
 
-* Change Hostname 
-[ESP102]<hostname>
-if authentication is on, need admin password
-[ESP102]<hostname>pwd=<admin password>
+* Set/Get STA IP mode (DHCP/STATIC) 
+[ESP102]<mode>pwd=<admin password>
 
-* Change Wifi mode (STA/AP) 
-[ESP103]<mode>
-if authentication is on, need admin password
-[ESP103]<mode>pwd=<admin password>
+* Set/Get STA IP/Mask/GW 
+[ESP103]IP=<IP> MSK=<IP> GW=<IP> pwd=<admin password>
 
-* Change STA IP mode (DHCP/STATIC) 
-[ESP104]<mode>
-if authentication is on, need admin password
-[ESP104]<mode>pwd=<admin password>
-
-* Change AP SSID 
-[ESP105]<SSID>
-if authentication is on, need admin password
+*  Set/Get AP SSID 
 [ESP105]<SSID>pwd=<admin password>
 
 * Change AP Password 
-[ESP106]<Password>
-if authentication is on, need admin password
 [ESP106]<Password>pwd=<admin password>
 
-* Change AP IP mode (DHCP/STATIC) 
-[ESP107]<mode>
-if authentication is on, need admin password
-[ESP107]<mode>pwd=<admin password>
+* Set/Get AP IP 
+[ESP107]<IP>pwd=<admin password>
 
-* Set wifi on/off
-[ESP110]<state>
-state can be ON, OFF, RESTART
-if authentication is on, need admin password
+* Set/Get AP channel 
+[ESP108]<channel>pwd=<admin password>
+
+* Set/Get radio state which can be WIFI-STA, WIFI-AP, BT, ETH-STA, ETH-AP, OFF
 [ESP110]<state>pwd=<admin password>
 
 * Get current IP
 [ESP111]<header answer>
 
-* Get hostname
-[ESP112]<header answer>
+* Get/Set hostname
+[ESP112]<Hostname> pwd=<admin password>
+
+* Get/Set immediate network(WiFi/BT/Ethernet) state which can be ON, OFF
+[ESP115]<state>pwd=<admin password>
+
+* Get/Set HTTP state which can be ON, OFF
+[ESP120]<state>pwd=<admin password>
+
+* Get/Set HTTP port 
+[ESP121]<port>pwd=<admin password>
+
+* Get/Set Telnet state which can be ON, OFF
+[ESP130]<state>pwd=<admin password>
+
+* Get/Set Telnet port 
+[ESP131]<port>pwd=<admin password>
+
+* Init / Get current time
+[ESP140]<INIT> <srv1=XXXXX> <srv2=XXXXX> <srv3=XXXXX> <zone=xxx> <dst=YES/NO> <time=YYYY-MM-DD#H24:MM:SS> pwd=<admin password>
+
+* Get/Set boot delay
+[ESP150]<time in milliseconds>[pwd=<admin password>]
+
+* Get/Set WebSocket state which can be ON, OFF
+[ESP160]<state>pwd=<admin password>
+
+* Get/Set WebSocket port 
+[ESP161]<port>pwd=<admin password>
 
 *Get/Set pin value
-[ESP201]P<pin> V<value> [PULLUP=YES RAW=YES ANALOG=NO ANALOG_RANGE=255 CLEARCHANNELS=NO]pwd=<admin password>
+[ESP201]P<pin> V<value> [PULLUP=YES RAW=YES]pwd=<admin password>
 if no V<value> get P<pin> value
-if V<value> 0/1 set INPUT_PULLUP value, but for GPIO16 INPUT_PULLDOWN_16
-GPIO1 and GPIO3 cannot be used as they are used for serial
-if PULLUP=YES set input pull up, if not set input
+if V<value> 0/1 set INPUT_PULLUP value, but for GPIO16(ESP8266) INPUT_PULLDOWN_16
+if PULLUP=YES set input pull up (for GPIO16(ESP8266) INPUT_PULLDOWN_16), if not set input
 if RAW=YES do not set pinmode just read value
+Flash pins (6~11) cannot be used
 
-* Output to oled column C and line L
-[ESP210]C=<col> L=<line> T=<Text>
+* Output to esp screen status
+[ESP214]<Text>pwd=<user password>
 
-* Output to oled line 1
-[ESP211]<Text>
+* Touch Calibration 
+[ESP215]<CALIBRATE>[pwd=<user password>]
 
-* Output to oled line 2
-[ESP212]<Text>
-
-* Output to oled line 3
-[ESP213]<Text>
-
-* Output to oled line 4
-[ESP214]<Text>
-
-* Give EEPROM Version detected
-[ESP300]
-
-*Get full EEPROM settings content
+* Get full EEPROM settings content
 but do not give any passwords
-can filter if only need wifi or printer 
-[ESP400]<network/printer>
+[ESP400] pwd=<admin password>
 
 *Set EEPROM setting
 position in EEPROM, type: B(byte), I(integer/long), S(string), A(IP address / mask)
 [ESP401]P=<position> T=<type> V=<value> pwd=<user/admin password>
-
-Positions:
-* EP_WIFI_MODE			0    //1 byte = flag
-* EP_STA_SSID				1    //33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
-* EP_STA_PASSWORD			34   //65 bytes 64 +1 = string ;warning does not support multibyte char like chinese
-* EP_STA_IP_MODE			99   //1 byte = flag
-* EP_STA_IP_VALUE			100  //4  bytes xxx.xxx.xxx.xxx
-* EP_STA_MASK_VALUE			104  //4  bytes xxx.xxx.xxx.xxx
-* EP_STA_GATEWAY_VALUE			108  //4  bytes xxx.xxx.xxx.xxx
-* EP_BAUD_RATE			112  //4  bytes = int
-* EP_STA_PHY_MODE			116  //1 byte = flag
-* EP_SLEEP_MODE			117  //1 byte = flag
-* EP_CHANNEL			118 //1 byte = flag
-* EP_AUTH_TYPE			119 //1 byte = flag
-* EP_SSID_VISIBLE			120 //1 byte = flag
-* EP_WEB_PORT			121 //4  bytes = int
-* EP_DATA_PORT			125 //4  bytes = int
-* EP_OUTPUT_FLAG			129 //1  bytes = flag
-* EP_HOSTNAME				130//33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
-* EP_DHT_INTERVAL		    164//4  bytes = int
-* EP_FREE_INT2		    168//4  bytes = int
-* EP_FREE_INT3		    172//4  bytes = int
-* EP_ADMIN_PWD		    176//21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
-* EP_USER_PWD		    197//21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
-* EP_AP_SSID				218    //33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
-* EP_AP_PASSWORD			251   //65 bytes 64 +1 = string ;warning does not support multibyte char like chinese
-* EP_AP_IP_VALUE			316  //4  bytes xxx.xxx.xxx.xxx
-* EP_AP_MASK_VALUE			320  //4  bytes xxx.xxx.xxx.xxx
-* EP_AP_GATEWAY_VALUE			324  //4  bytes xxx.xxx.xxx.xxx
-* EP_AP_IP_MODE			329   //1 byte = flag
-* EP_AP_PHY_MODE			330  //1 byte = flag
-* EP_FREE_STRING1			331  //129 bytes 128+1 = string  ; warning does not support multibyte char like chinese
-* EP_DHT_TYPE		460 //1  bytes = flag
-* EP_TARGET_FW		461 //1  bytes = flag
+Description:		Positions:
+ESP_RADIO_MODE          0       //1 byte = flag
+ESP_STA_SSID            1       //33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
+ESP_STA_PASSWORD        34      //65 bytes 64 +1 = string ;warning does not support multibyte char like chinese
+ESP_STA_IP_MODE         99      //1 byte = flag
+ESP_STA_IP_VALUE        100     //4  bytes xxx.xxx.xxx.xxx
+ESP_STA_MASK_VALUE      104     //4  bytes xxx.xxx.xxx.xxx
+ESP_STA_GATEWAY_VALUE   108     //4  bytes xxx.xxx.xxx.xxx
+ESP_BAUD_RATE           112     //4  bytes = int
+ESP_NOTIFICATION_TYPE   116     //1 byte = flag
+ESP_CALIBRATION         117     //1 byte = flag
+ESP_AP_CHANNEL          118     //1 byte = flag
+FREE                    119     //1 byte = flag
+FREE                    120     //1 byte = flag
+ESP_HTTP_PORT           121     //4  bytes = int
+ESP_TELNET_PORT         125     //4  bytes = int
+ESP_OUTPUT_FLAG         129     //1  bytes = flag
+ESP_HOSTNAME            130     //33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
+ESP_DHT_INTERVAL        164     //4  bytes = int
+ESP_SETTINGS_VERSION    168     //8  bytes = 7+1 = string ESP3D + 2 digits
+ESP_ADMIN_PWD           176     //21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
+ESP_USER_PWD            197     //21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
+ESP_AP_SSID             218     //33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
+ESP_AP_PASSWORD         251     //65 bytes 64 +1 = string ;warning does not support multibyte char like chinese
+ESP_AP_IP_VALUE         316     //4  bytes xxx.xxx.xxx.xxx
+ESP_BOOT_DELAY          320     //4  bytes xxx.xxx.xxx.xxx
+ESP_WEBSOCKET_PORT      324     //4  bytes xxx.xxx.xxx.xxx
+ESP_HTTP_ON             328     //1 byte = flag
+ESP_TELNET_ON           329     //1 byte = flag
+ESP_WEBSOCKET_ON        330     //1 byte = flag
+ESP_SD_SPEED_DIV        331     //1 byte = flag
+ESP_NOTIFICATION_TOKEN1 332    //64 bytes 63+1 = string  ; warning does not support multibyte char like chinese
+ESP_NOTIFICATION_TOKEN2 396    //64 bytes 63+1 = string  ; warning does not support multibyte char like chinese
+ESP_DHT_TYPE            460//1  bytes = flag
+ESP_TARGET_FW           461 //1  bytes = flag
+ESP_TIMEZONE            462//1  bytes = flag
+ESP_TIME_IS_DST         463//1  bytes = flag
+ESP_TIME_SERVER1        464//129 bytes 128+1 = string  ; warning does not support multibyte char like chinese
+ESP_TIME_SERVER2        593 //129 bytes 128+1 = string  ; warning does not support multibyte char like chinese
+ESP_TIME_SERVER3        722 //129 bytes 128+1 = string  ; warning does not support multibyte char like chinese
+ESP_IS_DIRECT_SD        850//1  bytes = flag
+ESP_PRIMARY_SD          851//1  bytes = flag
+ESP_SECONDARY_SD        852//1  bytes = flag
+ESP_DIRECT_SD_CHECK     853//1  bytes = flag
+ESP_SD_CHECK_UPDATE_AT_BOOT   854//1  bytes = flag
+ESP_NOTIFICATION_SETTINGS 855//128 bytes 127+1 = string  ; warning does not support multibyte char like chinese
+ESP_CALIBRATION_1       983
+ESP_CALIBRATION_2       987
+ESP_CALIBRATION_3       991
+ESP_CALIBRATION_4       995
+ESP_CALIBRATION_5       999
 
 *Get available AP list (limited to 30)
 output is JSON or plain text according parameter
-[ESP410]<plain>
+[ESP410]<plain><pwd=admin/user>
 
 *Get current settings of ESP3D
-output is JSON or plain text according parameter
-[ESP420]<plain>
+output is plain text 
+[ESP420]<pwd=admin/user>
 
-* Get/Set ESP mode
-cmd can be RESET, SAFEMODE, CONFIG, RESTART
-[ESP444]<cmd>
-if authentication is on, need admin password for RESET, RESTART and SAFEMODE
-[ESP444]<cmd>pwd=<admin password>
+* Set ESP State
+cmd are RESTART / RESET
+[ESP444]<cmd><pwd=admin>
 
-* Send GCode with check sum caching right line numbering
-[ESP500]<gcode>
+* Change admin password
+[ESP550]<password>pwd=<admin password>
 
-* Send line checksum
-[ESP501]<line>
-
-* Change / Reset user password
-[ESP555]<password>pwd=<admin password>
-if no password set it use default one
+* Change user password
+[ESP555]<password>pwd=<admin/user password>
 
 * Send Notification
 [ESP600]msg [pwd=<admin password>]
 
 * Set/Get Notification settings
 [ESP610]type=<NONE/PUSHOVER/EMAIL/LINE> T1=<token1> T2=<token2> TS=<Settings> [pwd=<admin password>]
-Get will give type and settings only not the protected T1/T2
+Get will give type and settings only, not the protected T1/T2
 
-* Read SPIFFS file and send each line to serial
-[ESP700]<filename>
-
-* Format SPIFFS
+* Format ESP Filesystem
 [ESP710]FORMAT pwd=<admin password>
 
-* SPIFFS total size and used size
-[ESP720]<header answer>
+* List ESP Filesystem
+[ESP720]<Root> pwd=<admin password>
 
-* Get fw version and basic information
-[ESP800]<header answer>
-
-* Get fw target
-[ESP801]<header answer>
-
-
-
+* FW Informations
+[ESP800]<plain> pwd=<admin password>
