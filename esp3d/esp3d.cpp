@@ -26,6 +26,7 @@
 */
 #include "esp3d.h"
 #include <EEPROM.h>
+#include <FS.h>
 #ifndef FS_NO_GLOBALS
 #define FS_NO_GLOBALS
 #endif
