@@ -29,6 +29,9 @@
 #ifndef FS_NO_GLOBALS
 #define FS_NO_GLOBALS
 #endif
+#ifdef ARDUINO_ARCH_ESP8266
+#include <FS.h>
+#endif
 #if defined (ASYNCWEBSERVER)
 #include <ESPAsyncWebServer.h>
 #endif
@@ -41,7 +44,6 @@
 #include "webinterface.h"
 #include "command.h"
 #ifdef ARDUINO_ARCH_ESP8266
-#include <FS.h>
 #include "ESP8266WiFi.h"
 #if defined (ASYNCWEBSERVER)
 #include <ESPAsyncTCP.h>
