@@ -26,11 +26,11 @@
 */
 #include "esp3d.h"
 #include <EEPROM.h>
-#ifndef FS_NO_GLOBALS
-#define FS_NO_GLOBALS
-#endif
 #ifdef ARDUINO_ARCH_ESP8266
 #include <FS.h>
+#endif
+#ifndef FS_NO_GLOBALS
+#define FS_NO_GLOBALS
 #endif
 #if defined (ASYNCWEBSERVER)
 #include <ESPAsyncWebServer.h>
