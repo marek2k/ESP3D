@@ -21,6 +21,7 @@
 #ifndef SYNCWEBSERVER_H
 #define SYNCWEBSERVER_H
 #include "config.h"
+#include <Arduino.h>
 #define NODEBUG_WEBSOCKETS
 #include <WebSocketsServer.h>
 
