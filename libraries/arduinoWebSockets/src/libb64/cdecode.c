@@ -6,8 +6,8 @@ For details, see http://sourceforge.net/projects/libb64
 */
 
 #ifdef ESP8266
-#define CORE_HAS_LIBB64
-//#include <core_esp8266_features.h>
+#include <stdint.h>
+#include <core_esp8266_features.h>
 #endif
 
 #if defined(ESP32)
